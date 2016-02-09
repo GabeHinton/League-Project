@@ -45,7 +45,7 @@ def main():
 
     # Be sure to put YOUR API_key in this blank before running the program.
 
-    api_key = '6bd40045-3a0c-4f8e-9296-e6c3a76cf6a4'
+    api_key = ''
     region = str(raw_input('Region (lower case):'))
     summoner_name = str(raw_input('Summoner Name IN LOWER CASE:'))
 
