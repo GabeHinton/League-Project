@@ -1,10 +1,10 @@
 # R Analysis - Player A
 
-rbdata <- read.table("D:\\My Documents\\LoL Analysis Data\\rheynbeaux_history.csv", sep=",", header=T)
+rbdata <- read.table("D:\\My Documents\\LoL Analysis Data\\r****b****_history.csv", sep=",", header=T)
 
 # I know this player primarily plays support so that's what I'm interested in this time.
 
-rbdata2 <- rheyndata[rheyndata$Role == "DUO_SUPPORT",]
+rbdata2 <- rbdata[rheyndata$Role == "DUO_SUPPORT",]
 
 # This leaves 224 observations remaining.
 
