@@ -3,7 +3,9 @@ I used Riot's API to model player behavior and outcomes in the game League of Le
 
 Table of Contents:
 * *Python-API-Data-Compiler* - My first python program - teaching myself from scratch to access Riot's API to compile a data set to use for building models.
-* *Report for Player T.md* - A report about a classification model I built using data compiled with the above Python program.  
+* Player T Report - Contains files related to the model built around Player T
+  * *Report for Player T.md* - A report about a classification model I built using data compiled with the above Python program.  
   * *Player T Analysis.R* - Here you can look at the code I wrote in R to analyze the data set and build the model discussed in this report.  
-*  *Report for Player A.md* - A follow up report focusing on a different style of player to compare classification models.  
+* Player A Files - Contains files related to the model built around Player A 
+  *  *Report for Player A.md* - A follow up report focusing on a different style of player to compare classification models.  
   * *Player A Analysis.R* - The code I wrote in R to analyze the data set and build the model for this report.  
