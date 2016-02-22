@@ -96,7 +96,29 @@ Following this procedure, the model reached was as follows:
     ## 
     ## Number of Fisher Scoring iterations: 4
 
-Recall that the primary output is in terms of "log-odds", which when taken as the power of mathematical *e* produces odds, the ratio of probability of success divided by probability of failure. With this in mind, the model coefficient (under the column Estimate in the table) when taken as the power of mathematical *e* produces the multiplicative change in odds for an increase of one in the corresponding variable, assuming all the other predictor variables are held at a constant value. Using all of this, we can interpret this model. For an increase of 1 damage taken per minute during minutes 10 to 20, the predicted odds that Player A will win the game are multiplied by *e^-.005 = .995*. If it increases by 10 then the odds are multiplied by .95. Increasing his average gold per minute for minutes 10 to 20 by 1 multiplies his odds of winning by *e^.0204 = 1.02*. If he increases it by 100 (meaning improves on his total gold across minutes 10 to 20 by 1000) his predicted odds of winning are multiplied by 7.69. For each individual ward he places during a match his predicted odds of winning increase by 1.07.
+So we see that the three significant variables are WardsPlaced, DamageTaken1020, and Gold1020.  This is reasonably intuitive when plotting these variables into a graph:
+
+![Player A Summary](https://github.com/GabeHinton/League-Project/blob/master/Images/Player.A.Summary.png?raw=true)
+
+Blue points are games that Player A won, and red points are games he lost.  The size of the point is based on how many wards he placed in that game.  We can see a trend that more wins (blue points) are found as we go further down and to the right on the plot, exactly as we expect. (Remember that smaller values of Damage Taken are preferred.) There are exceptions at the extremes, and more of a mix of points around the middle of the plot, which is also expected.  There are a multitude of variables not considered in the analysis, so we do not expect to be able to predict perfectly and account for all variation.
+
+Recall that the primary output is in terms of "log-odds", which when taken as the power of mathematical *e* produces odds, the ratio of probability of success divided by probability of failure. With this in mind, the model coefficient (under the column Estimate in the table) when taken as the power of mathematical *e* produces the multiplicative change in odds for an increase of one in the corresponding variable, assuming all the other predictor variables are held at a constant value. Using all of this, we can interpret this model. 
+
+For an increase of 1 damage taken per minute during minutes 10 to 20, the predicted odds that Player A will win the game are multiplied by *e^-.005 = .995*. If it increases by 10 then the odds are multiplied by .95. We can interpret this as probability with a bit more math.  *Probability = Odds / (1 + Odds)*  If we plug in the mean of all the other variables into the formula and calculate the result at each point on the range of DamageTaken1020, we can graph how the predicted probability of winning changes as DamageTaken1020 changes.
+
+![Player A DamageTaken1020](https://github.com/GabeHinton/League-Project/blob/master/Images/Player.A.DamageTaken1020.png?raw=true)
+
+Again, note that this graph is only specific to when WardsPlaced and Gold1020 are at their average level.  The general trend will be similar for most values, however.
+
+Increasing his average gold per minute for minutes 10 to 20 by 1 multiplies his odds of winning by *e^.0204 = 1.02*. If he increases it by 100 (meaning improves on his total gold across minutes 10 to 20 by 1000) his predicted odds of winning are multiplied by 7.69. 
+
+We can similarly build a plot for how predicted probability of winning changes as gold per minute from minutes 10 to 20 changes by plugging in the means for DamageTaken1020 and WardsPlaced.
+
+![Player A Gold1020](https://github.com/GabeHinton/League-Project/blob/master/Images/Player.A.Gold1020.png?raw=true)
+
+Finally, for each individual ward he places during a match his predicted odds of winning increase *e^.0661 = 1.07*.  And once again by holding DamageTaken1020 and Gold1020 at their means, a plot can be graphed of how number of wards placed changes the predicted probability of winning.
+
+![Player A WardsPlaced](https://github.com/GabeHinton/League-Project/blob/master/Images/Player.A.WardsPlaced.png?raw=true)
 
 Next the test data set was placed into this model to see how well the model would do at predicting the 42 known outcomes. The results were as follows:
 
