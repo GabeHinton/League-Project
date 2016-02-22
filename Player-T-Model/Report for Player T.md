@@ -139,7 +139,7 @@ Log-odds =  -3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1010
 
 We can convert log-odds to odds by simply taking *e^{estimate}* where *estimate* is the number in the Estimate column of the table. Note that odds and probability of winning are not exactly the same thing. Odds are the ratio of {Probability of Success} divided by {Probability of Failure}.  
 
-Thus, specifically, for each increase of one damage taken per minute from minutes ten to twenty in the game - or ten total damage taken from minutes ten to twenty - Player T's odds of winning will be multiplied by *e^{-.00162} = .998*.  We can interpret this as probability with a bit more math.  Probability = Odds / (1 + Odds).  If we plug in the mean of Gold1020 into the formula and calculate the result at each point on the range of DamageTaken1020, we can graph how the predicted probability of winning changes as DamageTaken1020 changes.
+Thus, specifically, for each increase of one damage taken per minute from minutes ten to twenty in the game - or ten total damage taken from minutes ten to twenty - Player T's odds of winning will be multiplied by *e^{-.00162} = .998*.  We can interpret this as probability with a bit more math.  Probability = Odds / (1 + Odds).  If we plug in the mean of Gold1020 into the formula and calculate the result at each point on the range of DamageTaken1020, we can graph how the predicted probability of winning changes as DamageTaken1020 changes.  The axis for damage taken will only cover the range observed in the data to avoid drawing bad conclusions by assuming behavior not actually seen.
 
 ![Player T DamageTaken1020](https://github.com/GabeHinton/League-Project/blob/master/Images/Player.T.DamageTaken1020.png?raw=true)
 
