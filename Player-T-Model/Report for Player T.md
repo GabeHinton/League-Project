@@ -4,13 +4,17 @@
 Summary
 -------
 
-Using Riot Games, Inc.'s public API a match history of 490 ranked games was pulled for a player referred to as Player T. For each of these games a number of variables were collected related to the player's behavior and actions during the game. A logistic regression was performed to explore whether any of these behaviors and actions, with an emphasis on behaviors during the early phases of the game, seemed to be closely related to eventually winning or losing the game.
+Using Riot Games, Inc.'s public API a match history of 490 ranked games was pulled for a player referred to as Player T. For each of these games a number of variables were collected related to the player's behavior and actions during the game. A logistic regression was performed to explore whether any of these behaviors and actions, with an emphasis on behaviors during the early phases of the game, seemed to be closely related to eventually winning or losing the game.  Long term, the goal of finding such models is to see if they can be generalized to fit more players, expand the models to account for more lurking variables, expand them to account for multiple players on a team, and ultimately to use them as a tool to help players identify areas of focus for improvement in their playing.
 
 Observations of games in which Player T was the Jungle or Support role were removed because the nature of those roles is so distinct from Top, Mid, and ADC that they would likely need a unique list of variables to have reasonable predictions.
 
 It is important to also note the limits of this analysis from the outset, for example noting that League of Legends is first and foremost a team game, so problems immediately arise from trying to predict the outcome of the game looking at only one player on that team.  In addition, it is difficult to claim causation from this analysis when a variable like gold, for example, could be increasing as a result of variables that were not considered, like number of kills.  
 
-A logistic model was successfully made on a training data set of 300 observations. Surprisingly, the only significantly related variables to victory or loss were gold earned per minute from minutes ten to twenty and damage taken per minute from minutes ten to twenty. Using a test data set of 60 observations, a Cohen's Kappa statistic was calculated to determine whether the model was predicting the outcome of the 60 games accurately beyond random chance. Cohen's Kappa was .327. It was predicting outcomes with more accuracy than would happen from normal chance, but not remarkably so. Gold earned per minute from minute ten to twenty and damage taken per minute from minute ten to twenty definitely have a relationship with victory, but it is not strong.
+A logistic model was successfully made on a training data set of 300 observations. Surprisingly, the only significantly related variables to victory or loss were gold earned per minute from minutes ten to twenty and damage taken per minute from minutes ten to twenty.  The model built was as follows:
+
+Predicted Probability of Winning = e^{-3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1010} / (1 + e^{-3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1010})
+
+Using a test data set of 60 observations, a Cohen's Kappa statistic was calculated to determine whether the model was predicting the outcome of the 60 games accurately beyond random chance. Cohen's Kappa was .327. It was predicting outcomes with more accuracy than would happen from normal chance, but not remarkably so. Gold earned per minute from minute ten to twenty and damage taken per minute from minute ten to twenty definitely have a relationship with victory, but it is not strong.
 
 Perhaps most interestingly, variables from minutes zero to ten of a match were not very related to victory at all. This suggests that Player T's early game performance does not have a strong impact on the outcome of the game, meaning he has room to make a comeback from a poor start, and should also avoid getting overzealous from an early lead.
 
@@ -90,7 +94,7 @@ Following this procedure, the first attempt at a model was as follows:
     ## 
     ## Number of Fisher Scoring iterations: 4
 
-Surprisingly, almost all variables were not significant in predicting whether Player T would win or lose the game he was playing. Only two were: DamageTaken1020 and Gold1020. The coefficients are the multiplied factor by which "log-odds" will change for a unit increase in the corresponding variable. We can convert log-odds to odds by simply taking \(e^{estimate}\) where *estimate* is the number in the Estimate column of the table. Note that odds and probability of winning are not exactly the same thing. Odds are the ratio of {Probability of Success} divided by {Probability of Failure}. Thus, specifically, this model predicts that for an increase of 1 Damage Taken Per Minute from minute ten to twenty of the game, Player T's odds of winning change by a multiplied factor of, on average, \(e^{-.002143} = .997\). In other words, his odds of winning are predicted to be .997 times what they were before for each 10 damage taken during minute ten to twenty. Regarding Gold, his odds of winning are predicted tp change by a multiplied factor of \(e^{.01116} = 1.011\). That is, his odds of winning are predicted as 1.011 times what they were for each set of ten gold he gains during minute ten to twenty of the game (again, because the actual variable is "gold per minute from minute ten to twenty").
+Surprisingly, almost all variables were not significant in predicting whether Player T would win or lose the game he was playing. Only two were: DamageTaken1020 and Gold1020.
 
 This result was a bit disappointing - these two variables have similar issues as Kills and Assists would, that as a team gains momentum the damage they take will decrease and the gold they gain will increase dramatically, so there is a legitimate concern that it cannot be used to predict a win so much as it is being used to predict whether a team has already done what it needs to do to be getting close to winning.
 
@@ -123,7 +127,28 @@ The procedure for selecting variables was the same as before, and the final mode
     ## 
     ## Number of Fisher Scoring iterations: 4
 
-Surprisingly, the exact same variables were left significant as before, with only slight changes to the coefficients. Interpresting these coefficients, for each ten damage taken from minutes ten to twenty in the game, Player T's odds of winning will be multipled by \(e^{-.00162} = .998\), and for every ten gold earned from minutes ten to twenty in the game, Player T's odds of winning will be multiplied by \(e^{.0118} = 1.012\). Put into perhaps a more interesting and relatable interpretation, if Player T earns an additional 1000 gold during minutes ten to twenty of the game, his odds (not probability, remember) of winning are predicted to be multiplied by \(e^{1.184} = 3.267\), which is a much more notable increase, with 1000 gold still being a very attainable goal.
+Surprisingly, the exact same variables were left significant as before, with only slight changes to the coefficients.  If the data of these variables is plotted, this seems reasonably intuitive.  
+
+![]()
+
+Blue points are games that Player T won, and red points are games he lost.  We can see a trend that more wins (blue points) are found as we go further down and to the right on the plot, exactly as we expect. (Remember that smaller values of Damage Taken are preferred.) There are exceptions at the extremes, and more of a mix of points around the middle of the plot, which is also expected.  There are a multitude of variables not considered in the analysis, so we do not expect to be able to predict perfectly and account for all variation.
+
+To interpret the model, note that the coefficients are the multiplied factor by which "log-odds" will change for a unit increase in the corresponding variable. Thus the model is:
+
+Log-odds =  -3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1010
+
+We can convert log-odds to odds by simply taking *e^{estimate}* where *estimate* is the number in the Estimate column of the table. Note that odds and probability of winning are not exactly the same thing. Odds are the ratio of {Probability of Success} divided by {Probability of Failure}.  
+
+Thus, specifically, for each increase of one damage taken per minute from minutes ten to twenty in the game - or ten total damage taken from minutes ten to twenty - Player T's odds of winning will be multiplied by *e^{-.00162} = .998*.  We can interpret this as probability with a bit more math.  Probability = Odds / (1 + Odds).  If we plug in the mean of Gold1020 into the formula and calculate the result at each point on the range of DamageTaken1020, we can graph how the predicted probability of winning changes as DamageTaken1020 changes.
+
+![]()
+
+Again, note that this graph is only specific to when Gold1020 is at its average level.  The general trend will be similar for most values, however.
+
+For every ten gold earned from minutes ten to twenty in the game, Player T's odds of winning will be multiplied by *e^{.0118} = 1.012*. Put into perhaps a more interesting and relatable interpretation, if Player T earns an additional 1000 gold during minutes ten to twenty of the game, his odds (not probability, remember) of winning are predicted to be multiplied by *e^{1.184} = 3.267*, which is a much more notable increase, with 1000 gold still being a very attainable goal.  This time, by plugging in DamageTaken1020 at its mean value we can plot how the predicted probability of winning changes as Gold1020 changes.
+
+![]()
+
 
 At this point it is worthwhile to note that a model suggesting a relationship between these variables is not in itself sufficient to suggest that having more gold and taking less damage directly cause Player T to be more likely to win. There are plenty of other difficult to quantify variables at play in a PvP game, and as already mentioned gold and damage taken could also just be the result (much like victory or loss themselves) of other player behaviors that also happen to cause the player to be more or less likely to win the game. Care must be taken to not assume that the results are as simple as earning more gold in a game directly causing Player T to be more likely to win. For example, maybe Player T has more gold because he killed more enemy players, which is also putting is team in a map position to take objectives and ultimately destroy the enemy base. The gold itself might not be what helps Player T win - it could be a side effect of the unknown behaviors that actually help Player T's team win.
 
@@ -141,7 +166,11 @@ To quantify a bit more reliably, rather than simply concluding the model was acc
 Conclusion
 ----------
 
-Looking at the gold earned and damage taken of one of Player T's League of Legends matches can give a prediction of whether Player T will win or lose more often than just guessing from random chance. However, it does not increase the accuracy of predictions by a remarkable amount, so while a relationship between gold earned and damage taken in minutes ten to twenty of a game and the outcome of the game does exist, it is not a very strong relationship. Unfortunately we cannot also conclude that deliberately increasing gold earned or decreasing damage taken will also directly result in Player T being more likely to win, although in context this is certainly intuitive, so it is not out of the question.
+Looking at the gold earned and damage taken of one of Player T's League of Legends matches can give a prediction of whether Player T will win or lose more often than just guessing from random chance. The model created to do so is as follows:
+
+Predicted Probability of Winning = e^{-3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1010} / (1 + e^{-3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1010})
+
+However, it does not increase the accuracy of predictions by a remarkable amount, so while a relationship between gold earned and damage taken in minutes ten to twenty of a game and the outcome of the game does exist, it is not a very strong relationship. Unfortunately we cannot also conclude that deliberately increasing gold earned or decreasing damage taken will also directly result in Player T being more likely to win, although in context this is certainly intuitive, so it is not out of the question.
 
 Also, it must be recognized that League of Legends is primarily a team game, so there are innate limitations to looking at the behavior of only one player in the game when predicting the outcome.
 
