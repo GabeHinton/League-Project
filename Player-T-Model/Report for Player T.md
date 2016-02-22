@@ -12,7 +12,7 @@ It is important to also note the limits of this analysis from the outset, for ex
 
 A logistic model was successfully made on a training data set of 300 observations. Surprisingly, the only significantly related variables to victory or loss were gold earned per minute from minutes ten to twenty and damage taken per minute from minutes ten to twenty.  The model built was as follows:
 
-Predicted Probability of Winning = e^{-3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1010} / (1 + e^{-3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1010})
+Predicted Probability of Winning = e^{-3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1020} / (1 + e^{-3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1020})
 
 Using a test data set of 60 observations, a Cohen's Kappa statistic was calculated to determine whether the model was predicting the outcome of the 60 games accurately beyond random chance. Cohen's Kappa was .327. It was predicting outcomes with more accuracy than would happen from normal chance, but not remarkably so. Gold earned per minute from minute ten to twenty and damage taken per minute from minute ten to twenty definitely have a relationship with victory, but it is not strong.
 
@@ -168,7 +168,7 @@ Conclusion
 
 Looking at the gold earned and damage taken of one of Player T's League of Legends matches can give a prediction of whether Player T will win or lose more often than just guessing from random chance. The model created to do so is as follows:
 
-Predicted Probability of Winning = e^{-3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1010} / (1 + e^{-3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1010})
+Predicted Probability of Winning = e^{-3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1020} / (1 + e^{-3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1020})
 
 However, it does not increase the accuracy of predictions by a remarkable amount, so while a relationship between gold earned and damage taken in minutes ten to twenty of a game and the outcome of the game does exist, it is not a very strong relationship. Unfortunately we cannot also conclude that deliberately increasing gold earned or decreasing damage taken will also directly result in Player T being more likely to win, although in context this is certainly intuitive, so it is not out of the question.
 
