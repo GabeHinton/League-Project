@@ -14,7 +14,7 @@ In addition, the observations for Player A cover a longer range of his total tim
 
 In the end, the clear predictors of the outcome were Gold1020 and DamageTaken1020, the two variables in the final model for Player A, as well as WardsPlaced, which was a nice confirmation of intuition about the importance of map vision in a game of LoL.  The final model was:
 
-Predicted Probability of Winning the Game = e^{-4.67 - .005*DamageTaken1020 + .0204*Gold1020 + .0661*WardsPlaced} / (1 + e^{-4.67 - .005*DamageTaken1020 + .0204*Gold1020 + .0661*WardsPlaced})
+Predicted Probability of Winning the Game = e^{-4.67 - .005\*DamageTaken1020 + .0204\*Gold1020 + .0661\*WardsPlaced} / (1 + e^{-4.67 - .005\*DamageTaken1020 + .0204\*Gold1020 + .0661\*WardsPlaced})
 
 In closing, perhaps aside from placing wards and disarming enemy players with crowd control abilities the first ten minutes of the game again seem to be poor predictors of the game outcome, as with Player T. One wonders though about the variables regarding gold and damage taken in minutes 10 to 20 showing up again - this may perhaps provide more evidence that these variables are just reflections of Player A and T's skills like good team fight engagement positioning and number of kills, rather than suggesting they should actively forsake other activities to get more gold and take less damage in order to win the game. Placing wards seems to clearly be an important factor in winning games to improve map vision for Player A. On the other hand, perhaps he is more likely to remember to continue placing wards in games that his team is currently winning. In short, there are some interesting conclusions, and plenty of room for further exploration and model building.  Some possible paths to look into include separating gold from creep farming and gold from kills to try to reduce lurking variables, and building models that account for these variables across an entire team instead of a single player.
 
@@ -134,7 +134,7 @@ Conclusion
 
 Our final model is as follows:
 
-Predicted Probability of Winning the Game = e^{-4.67 - .005*DamageTaken1020 + .0204*Gold1020 + .0661*WardsPlaced} / (1 + e^{-4.67 - .005*DamageTaken1020 + .0204*Gold1020 + .0661*WardsPlaced})
+Predicted Probability of Winning the Game = e^{-4.67 - .005\*DamageTaken1020 + .0204\*Gold1020 + .0661\*WardsPlaced} / (1 + e^{-4.67 - .005\*DamageTaken1020 + .0204\*Gold1020 + .0661\*WardsPlaced})
 
 This model does have a notable amount of predictive power for Player A's games, and it is reassuring to see WardsPlaced included, since that seems intuitive for the support role. The reappearance of DamageTaken1020 and Gold1020 from Player T's model adds an interesting element of confirmation, but at the same time may also raise concerns that those are products of kills and assists that are more accurately a reflection of a team being in the lead. Player A can take comfort that early game mistakes can be recovered from and early game leads are not reason to be overzealous. Whether the increased amount of wards placed are causing the team to be more likely to win, or whether he is more likely to remember to place wards when his team is already winning, the conclusion remains that reminding himself to place wards continually is clearly helpful to his team.
 
