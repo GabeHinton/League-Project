@@ -137,4 +137,29 @@ sum(resultstep==0 & rbtestdata$Winner.==0)
 # It matched 81% instead, so the formula for Cohen's Kappa will be:
 (.81-.57)/(1-.57) # = .5581
 
+# Here are some helpful graphs.
+
+library(ggplot2)
+
+ggplot(data=rbtraindata, aes(Gold1020, DamageTaken1020)) + geom_point(aes(color=as.factor(Winner.), size=WardsPlaced)) + scale_color_manual(name="Outcome", labels=c("Lost", "Won"), values=c("red", "blue")) +
+  scale_size_continuous(range=c(0,8))
+
+mean(rbtraindata$WardsPlaced[rbtraindata$Winner.==1])
+mean(rbtraindata$WardsPlaced[rbtraindata$Winner.==0])
+
+# Function for probability regarding WardsPlaced with others at mean
+func1 <- exp(-4.674-.005002*mean(rbtraindata$DamageTaken1020)+.020411*mean(rbtraindata$Gold1020)+.066109*c(1:50))/(1 + exp(-4.674-.005002*mean(rbtraindata$DamageTaken1020)+.020411*mean(rbtraindata$Gold1020)+.066109*c(1:50)))
+wardvalue <- c(1:50)
+func1data <- as.data.frame(cbind(func1, wardvalue))
+ggplot(data=func1data, aes(wardvalue, func1)) + geom_line(size=1) + labs(title="Predicted Probability of Winning as Wards Placed Changes", x="Wards Placed", y="Predicted Probability of Winning") + scale_y_continuous(limits=c(0,1))
+
+# Same for Gold1020
+func2 <- exp(-4.674-.005002*mean(rbtraindata$DamageTaken1020)+.020411*c(100:450)+.066109*mean(rbtraindata$WardsPlaced))/(1 + exp(-4.674-.005002*mean(rbtraindata$DamageTaken1020)+.020411*c(100:450)+.066109*mean(rbtraindata$WardsPlaced)))
+func2data <- as.data.frame(cbind(func2, c(100:450)))
+ggplot(data=func2data, aes(c(100:450), func2)) + geom_line(size=1) + labs(title="Predicted Probability of Winning as Gold Earned from 10-20 Changes", x="Gold Per Minute from Minute 10 to 20", y="Predicted Probability of Winning") + scale_y_continuous(limits=c(0,1))
+
+# Same for DamageTaken1020
+func3 <- exp(-4.674-.005002*c(0:900)+.020411*mean(rbtraindata$Gold1020)+.066109*mean(rbtraindata$WardsPlaced))/(1 + exp(-4.674-.005002*c(0:900)+.020411*mean(rbtraindata$Gold1020)+.066109*mean(rbtraindata$WardsPlaced)))
+func3data <- as.data.frame(cbind(func3, c(0:900)))
+ggplot(data=func3data, aes(c(0:900), func3)) + geom_line(size=1) + labs(title="Predicted Probability of Winning as Damage Taken from 10-20 Changes", x="Damage Taken Per Minute from Minute 10 to 20", y="Predicted Probability of Winning") + scale_y_continuous(limits=c(0,1))
 
