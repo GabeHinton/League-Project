@@ -129,7 +129,7 @@ The procedure for selecting variables was the same as before, and the final mode
 
 Surprisingly, the exact same variables were left significant as before, with only slight changes to the coefficients.  If the data of these variables is plotted, this seems reasonably intuitive.  
 
-![]()
+![Player T Summary](https://github.com/GabeHinton/League-Project/blob/master/Images/Player.T.Summary.png?raw=true)
 
 Blue points are games that Player T won, and red points are games he lost.  We can see a trend that more wins (blue points) are found as we go further down and to the right on the plot, exactly as we expect. (Remember that smaller values of Damage Taken are preferred.) There are exceptions at the extremes, and more of a mix of points around the middle of the plot, which is also expected.  There are a multitude of variables not considered in the analysis, so we do not expect to be able to predict perfectly and account for all variation.
 
@@ -141,13 +141,13 @@ We can convert log-odds to odds by simply taking *e^{estimate}* where *estimate*
 
 Thus, specifically, for each increase of one damage taken per minute from minutes ten to twenty in the game - or ten total damage taken from minutes ten to twenty - Player T's odds of winning will be multiplied by *e^{-.00162} = .998*.  We can interpret this as probability with a bit more math.  Probability = Odds / (1 + Odds).  If we plug in the mean of Gold1020 into the formula and calculate the result at each point on the range of DamageTaken1020, we can graph how the predicted probability of winning changes as DamageTaken1020 changes.
 
-![]()
+![Player T DamageTaken1020](https://github.com/GabeHinton/League-Project/blob/master/Images/Player.T.DamageTaken1020.png?raw=true)
 
 Again, note that this graph is only specific to when Gold1020 is at its average level.  The general trend will be similar for most values, however.
 
 For every ten gold earned from minutes ten to twenty in the game, Player T's odds of winning will be multiplied by *e^{.0118} = 1.012*. Put into perhaps a more interesting and relatable interpretation, if Player T earns an additional 1000 gold during minutes ten to twenty of the game, his odds (not probability, remember) of winning are predicted to be multiplied by *e^{1.184} = 3.267*, which is a much more notable increase, with 1000 gold still being a very attainable goal.  This time, by plugging in DamageTaken1020 at its mean value we can plot how the predicted probability of winning changes as Gold1020 changes.
 
-![]()
+![Player T Gold1020](https://github.com/GabeHinton/League-Project/blob/master/Images/Player.T.Gold1020.png?raw=true)
 
 
 At this point it is worthwhile to note that a model suggesting a relationship between these variables is not in itself sufficient to suggest that having more gold and taking less damage directly cause Player T to be more likely to win. There are plenty of other difficult to quantify variables at play in a PvP game, and as already mentioned gold and damage taken could also just be the result (much like victory or loss themselves) of other player behaviors that also happen to cause the player to be more or less likely to win the game. Care must be taken to not assume that the results are as simple as earning more gold in a game directly causing Player T to be more likely to win. For example, maybe Player T has more gold because he killed more enemy players, which is also putting is team in a map position to take objectives and ultimately destroy the enemy base. The gold itself might not be what helps Player T win - it could be a side effect of the unknown behaviors that actually help Player T's team win.
