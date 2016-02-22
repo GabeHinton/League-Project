@@ -135,7 +135,7 @@ Blue points are games that Player T won, and red points are games he lost.  We c
 
 To interpret the model, note that the coefficients are the multiplied factor by which "log-odds" will change for a unit increase in the corresponding variable. Thus the model is:
 
-Log-odds =  -3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1010
+Log-odds =  -3.0985 - 0.0016\*DamageTaken1020 + .0118\*Gold1020
 
 We can convert log-odds to odds by simply taking *e^{estimate}* where *estimate* is the number in the Estimate column of the table. Note that odds and probability of winning are not exactly the same thing. Odds are the ratio of {Probability of Success} divided by {Probability of Failure}.  
 
