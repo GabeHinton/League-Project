@@ -129,3 +129,27 @@ sum(result2 == 1)
 
 # This is a decent Cohen's Kappa, confirming that the model is correctly predicting beyond random chance
 # because .327 > 0.  It isn't predicting remarkably consistently but we can discuss that in the conclusion.
+
+# Here are some useful plots:
+
+library(ggplot2)
+
+ggplot(data=biztraindata2, aes(Gold1020, DamageTaken1020)) + geom_point(aes(color=as.factor(Winner.))) + scale_color_manual(name="Outcome", labels=c("Lost", "Won"), values=c("red", "blue")) +
+  labs(title="Plot of Significant Variables", x="Gold Earned per Minute from Minutes 10 to 20", y="Damage Taken per Minute from Minutes 10 to 20")
+
+# Plot for Probability as determined by Gold1020 when DamageTaken1020 is held at its mean
+bizfunc <- exp(-3.0985 - 0.0016*mean(biztraindata2$DamageTaken1020) + .0118*c(150:715))/(1 + exp(-3.0985 - 0.0016*mean(biztraindata2$DamageTaken1020) + .0118*c(150:715)))
+bizfuncdata <- as.data.frame(cbind(bizfunc, c(150:715)))
+ggplot(data=bizfuncdata, aes(c(150:715), bizfunc)) + geom_line(size=1) + labs(title="Predicted Probability of Winning as Gold Earned from 10-20 Changes", x="Gold Per Minute from Minute 10 to 20", y="Predicted Probability of Winning") + scale_y_continuous(limits=c(0,1))
+
+# Same for DamageTaken1020
+bizfunc2 <- exp(-3.0985 - 0.0016*c(100:1300) + .0118*mean(biztraindata2$Gold1020))/(1 + exp(-3.0985 - 0.0016*c(100:1300) + .0118*mean(biztraindata2$Gold1020)))
+bizfunc2data <- as.data.frame(cbind(bizfunc2, c(100:1300)))
+ggplot(data=bizfunc2data, aes(c(100:1300), bizfunc2)) + geom_line(size=1) + labs(title="Predicted Probability of Winning as Damage Taken from 10-20 Changes", x="Damage Taken Per Minute from Minute 10 to 20", y="Predicted Probability of Winning") + scale_y_continuous(limits=c(0,1))
+
+
+
+
+
+
+
