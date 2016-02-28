@@ -9,7 +9,7 @@ The model correctly predicted 2/3 of games, notably more than would be expected 
 
 1) Can we generalize the model for all players?  Will the same and only the same two variables be significant in models built for different players playing Top, Mid, and/or ADC?  
 2) Can we generalize the model for all roles?  Will the same and only the same two variables be significant in models built for players playing as Jungle or Support?  
-3) Can we add other variables not yet considered to improve the accuracy of predictions of Player T's model?
+3) Can we add other variables not yet considered to improve the accuracy of predictions of Player T's model?  
 4) Can we support a claim that more gold and less damage taken are actually causing Player T to win?  One cannot conclude with confidence that taking less damage or earning more gold specifically lead to Player T having a higher chance of victory.  It is possible that Player T is performing other actions that lead to his victory that also have a side effect of earning him gold or taking less damage. 
 
 Performing additional tests to find evidence to answering these questions will help validate and clarify the model.
