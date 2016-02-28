@@ -5,7 +5,7 @@ Data was compiled for ranked games during which Player T played Top, Mid, or ADC
 Gold1020: The average gold per minute Player T earned from minutes 10 to 20  
 DamageTaken1020: The average damage per minute Player T took from minutes 10 to 20  
 
-The model correctly predicted 2/3 of games, notably more than would be expected from lucky guesses.  Far from perfect accuracy is to be expected when trying to predict the outcome of a team game based on one player.  However it does seem these results indicate that a more accurate model that accounts for more variables should be possible.  Thus, this analysis has led to the following questions that merit more testing to answer:  
+The model correctly predicted 2/3 of games, notably more than would be expected from lucky guesses.  Far from perfect accuracy is to be expected when trying to predict the outcome of a team game based on one player.  However, it does seem these results indicate that a more accurate model that accounts for more variables should be possible.  Thus, this analysis has led to the following questions that merit more testing to answer:  
 
 1) Can we generalize the model for all players?  Will the same and only the same two variables be significant in models built for different players playing Top, Mid, and/or ADC?  
 2) Can we generalize the model for all roles?  Will the same and only the same two variables be significant in models built for players playing as Jungle or Support?  
