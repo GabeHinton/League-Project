@@ -20,7 +20,7 @@ One cannot conclude with confidence that taking less damage or earning more gold
 chance of victory. It is possible that Players T and A are performing other actions that lead to his victory that also have a side effect 
 of earning him gold or taking less damage.
 
-Performing additional tests to cover a larger number of players to find evidence to address these questions will help validate
+Performing additional tests using a larger number of players to find evidence to address these questions will help validate
  and clarify the models.
  
 Numerically, the final model for Player A was as follows:
