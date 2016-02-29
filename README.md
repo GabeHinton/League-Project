@@ -1,5 +1,5 @@
 # League-Project
-I used Riot's API to model player behavior and outcomes in the game League of Legends.  The first project has been to use python to access Riot's public API to compile a data set of approximately 12 variables from the past 300 or so games of a given player's match history.  I used these data sets to build models to assess what variables may be useful for predicting whether the player will win or lose a match.
+I used Riot's API to model player behavior and outcomes in the game League of Legends.  The first project has been to use python to access Riot's public API to compile a data set of 22 variables from the past 400 or so games of a given player's match history.  I used these data sets to build models to assess which variables may be useful for predicting whether the player will win or lose a match.
 
 Table of Contents:
 * *Python-API-Data-Compiler* - My first python program - teaching myself from scratch to access Riot's API to compile a data set to use for building models.
